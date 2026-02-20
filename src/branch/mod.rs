@@ -9,7 +9,7 @@ use crate::internal::{Err, IResult, Parser};
 
 /// Helper trait for the [alt()] combinator.
 ///
-/// This trait is implemented for tuples of up to 21 elements
+/// This trait is implemented for tuples of up to 30 elements
 pub trait Alt<I, O, E> {
   /// Tests each parser in the tuple and returns the result of the first one that succeeds
   fn choice(&mut self, input: I) -> IResult<I, O, E>;
@@ -17,7 +17,7 @@ pub trait Alt<I, O, E> {
 
 /// Tests a list of parsers one by one until one succeeds.
 ///
-/// It takes as argument a tuple of parsers. There is a maximum of 21
+/// It takes as argument a tuple of parsers. There is a maximum of 30
 /// parsers. If you need more, it is possible to nest them in other `alt` calls,
 /// like this: `alt(parser_a, alt(parser_b, parser_c))`
 ///
@@ -156,7 +156,9 @@ macro_rules! alt_trait_inner(
   );
 );
 
-alt_trait!(A B C D E F G H I J K L M N O P Q R S T U);
+alt_trait!(
+  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD
+);
 
 // Manually implement Alt for (A,), the 1-tuple type
 impl<Input, Output, Error: ParseError<Input>, A: Parser<Input, Output, Error>>
@@ -264,4 +266,13 @@ permutation_trait!(
   FnS S s
   FnT T t
   FnU U u
+  FnV V v
+  FnW W w
+  FnX X x
+  FnY Y y
+  FnZ Z z
+  FnAA AA aa
+  FnAB AB ab
+  FnAC AC ac
+  FnAD AD ad
 );
